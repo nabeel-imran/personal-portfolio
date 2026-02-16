@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp, FaRocket, FaCode, FaBrain, FaServer, FaAward, FaTimes, FaExternalLinkAlt, FaCheckCircle, FaLightbulb, FaTrophy, FaPaperPlane, FaRobot, FaGraduationCap, FaBriefcase, FaCalendar, FaMapMarkerAlt, FaPhone, FaUser, FaCommentDots, FaStar, FaChevronRight, FaCertificate, FaTools, FaChartLine, FaBars } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp, FaRocket, FaCode, FaBrain, FaAward, FaTimes, FaExternalLinkAlt, FaCheckCircle, FaLightbulb, FaTrophy, FaPaperPlane, FaRobot, FaGraduationCap, FaBriefcase, FaCalendar, FaMapMarkerAlt, FaPhone, FaUser, FaCommentDots, FaStar, FaChevronRight, FaCertificate, FaTools, FaChartLine, FaBars } from 'react-icons/fa'
 import Image from 'next/image'
 import MobileMenu from '@/components/MobileMenu'
 
