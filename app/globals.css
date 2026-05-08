@@ -1,0 +1,455 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------
+   Design tokens — DARK (default)
+---------------------------------------------------------------- */
+:root,
+:root[data-theme='dark'] {
+  --bg-primary: #080910;
+  --bg-secondary: #0d0f17;
+  --bg-tertiary: #13162b;
+  --bg-glass: rgba(255, 255, 255, 0.03);
+  --bg-glass-strong: rgba(13, 15, 23, 0.7);
+  --bg-overlay: rgba(8, 9, 16, 0.97);
+
+  --accent-primary: #3b82f6;
+  --accent-bright: #60a5fa;
+  --accent-glow: rgba(59, 130, 246, 0.15);
+  --accent-subtle: rgba(59, 130, 246, 0.08);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --text-code: #7dd3fc;
+
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-accent: rgba(59, 130, 246, 0.3);
+
+  --shadow-soft: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --noise-opacity: 0.025;
+  --grid-line: rgba(59, 130, 246, 0.03);
+  --shimmer: rgba(255, 255, 255, 0.03);
+
+  --gradient-hero: linear-gradient(135deg, #080910 0%, #0d1128 50%, #080910 100%);
+  --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --gradient-card: linear-gradient(135deg, #0d0f17 0%, #13162b 100%);
+
+  color-scheme: dark;
+}
+
+/* ----------------------------------------------------------------
+   Design tokens — LIGHT
+---------------------------------------------------------------- */
+:root[data-theme='light'] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7f9fc;
+  --bg-tertiary: #eef2f8;
+  --bg-glass: rgba(255, 255, 255, 0.65);
+  --bg-glass-strong: rgba(255, 255, 255, 0.92);
+  --bg-overlay: rgba(255, 255, 255, 0.97);
+
+  --accent-primary: #2563eb;
+  --accent-bright: #1d4ed8;
+  --accent-glow: rgba(37, 99, 235, 0.18);
+  --accent-subtle: rgba(37, 99, 235, 0.07);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-code: #1d4ed8;
+
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-accent: rgba(37, 99, 235, 0.3);
+
+  --shadow-soft: 0 16px 40px -18px rgba(15, 23, 42, 0.18);
+  --shadow-card: 0 6px 24px rgba(15, 23, 42, 0.08);
+  --noise-opacity: 0.018;
+  --grid-line: rgba(37, 99, 235, 0.05);
+  --shimmer: rgba(15, 23, 42, 0.04);
+
+  --gradient-hero: linear-gradient(135deg, #ffffff 0%, #eef4ff 50%, #ffffff 100%);
+  --gradient-accent: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --gradient-card: linear-gradient(135deg, #ffffff 0%, #f3f6fc 100%);
+
+  color-scheme: light;
+}
+
+/* Smooth theme cross-fade. Avoid transitioning every property to keep things
+   crisp; just the colors that change. */
+html,
+body,
+.glass-card,
+section,
+nav,
+header,
+footer,
+aside,
+a,
+button {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+/* ----------------------------------------------------------------
+   Base — wrapped in @layer base so utilities can override
+---------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
+    min-height: 100vh;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: var(--noise-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px 128px;
+    mix-blend-mode: multiply;
+  }
+
+  h1 {
+    font-family: var(--font-display), var(--font-inter), system-ui, sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+
+  h2 {
+    font-family: var(--font-display), var(--font-inter), system-ui, sans-serif;
+    font-size: clamp(1.875rem, 4.2vw, 3.25rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+
+  h3 {
+    font-family: var(--font-display), var(--font-inter), system-ui, sans-serif;
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--bg-tertiary); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+
+  ::selection { background: var(--accent-glow); color: var(--text-primary); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Stop ugly tap-highlight on iOS */
+  a, button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ----------------------------------------------------------------
+   Custom utilities & components
+---------------------------------------------------------------- */
+@layer components {
+  .glass-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .glass-card:hover {
+    border-color: var(--border-accent);
+    box-shadow: 0 0 30px var(--accent-glow), 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+  }
+
+  .accent-underline {
+    position: relative;
+  }
+
+  .accent-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-primary);
+    transition: width 0.3s ease;
+  }
+
+  .accent-underline:hover::after {
+    width: 100%;
+  }
+
+  .section-padding {
+    padding-top: clamp(60px, 10vw, 120px);
+    padding-bottom: clamp(60px, 10vw, 120px);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+}
+
+/* ----------------------------------------------------------------
+   Marquee (CSS-only)
+---------------------------------------------------------------- */
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.marquee-container::before,
+.marquee-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-container::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-primary), transparent);
+}
+
+.marquee-container::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-primary), transparent);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track-reverse {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: marquee-reverse 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee-container:hover .marquee-track,
+.marquee-container:hover .marquee-track-reverse {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% / 3)); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(calc(-100% / 3)); }
+  to { transform: translateX(0); }
+}
+
+/* ----------------------------------------------------------------
+   Animations
+---------------------------------------------------------------- */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.blink { animation: blink 1s step-end infinite; }
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+  50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.3); }
+}
+
+.glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float { animation: float 6s ease-in-out infinite; }
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.shimmer-bg {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--shimmer), transparent);
+  animation: shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.gradient-animate {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+/* Hover lift utility */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft), 0 0 30px var(--accent-glow);
+}
+
+/* ----------------------------------------------------------------
+   Page-load entrance animations (CSS-based to avoid hydration mismatch)
+---------------------------------------------------------------- */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-up-md {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-scale {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.anim-fade-up {
+  opacity: 0;
+  animation: fade-up 0.5s ease-out forwards;
+}
+.anim-fade-up-md {
+  opacity: 0;
+  animation: fade-up-md 0.4s ease-out forwards;
+}
+.anim-fade-scale {
+  opacity: 0;
+  animation: fade-scale 0.6s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .anim-fade-up-md,
+  .anim-fade-scale {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------------------------
+   Code syntax tokens — terminals render on dark surfaces in BOTH themes
+   (the TerminalCard component uses a fixed dark editor background) so we
+   keep these consistent rather than swapping per theme.
+---------------------------------------------------------------- */
+.token-keyword { color: #c792ea; }
+.token-string { color: #c3e88d; }
+.token-comment { color: #546e7a; font-style: italic; }
+.token-function { color: #82aaff; }
+.token-const { color: #c792ea; }
+.token-variable { color: #eeffff; }
+.token-operator { color: #89ddff; }
+.token-punctuation { color: #89ddff; }
+.token-await { color: #c792ea; }
+.token-property { color: #f07178; }
+
+/* ----------------------------------------------------------------
+   Performance — disable expensive backdrop-filter on mobile / coarse
+   pointers where blur composition can drag scroll FPS into single digits.
+---------------------------------------------------------------- */
+@media (max-width: 768px), (pointer: coarse) {
+  .glass-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--bg-glass-strong);
+  }
+}
+
+/* ----------------------------------------------------------------
+   Reduce motion
+---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ----------------------------------------------------------------
+   Mobile-specific tweaks
+---------------------------------------------------------------- */
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+}
