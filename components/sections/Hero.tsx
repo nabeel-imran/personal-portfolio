@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Download, MapPin } from 'lucide-react'
+import { ArrowRight, MapPin } from 'lucide-react'
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter'
 import { WhatsAppCTA } from '@/components/ui/FloatingActions'
 import { EASE } from '@/components/ui/SectionWrapper'
@@ -90,9 +90,6 @@ export function Hero() {
               <button onClick={() => scrollTo('projects')} className="btn-outline">
                 View Work
               </button>
-              <a href="/cv/Nabeel_Imran_CV.pdf" download="Nabeel_Imran_CV.pdf" className="btn-outline">
-                <Download className="w-4 h-4" /> CV
-              </a>
               <WhatsAppCTA variant="solid" label="WhatsApp" />
             </motion.div>
 
