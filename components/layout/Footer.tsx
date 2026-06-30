@@ -4,7 +4,7 @@ const navLinks = [
   { label: 'About', href: '/#about' },
   { label: 'Projects', href: '/#projects' },
   { label: 'Experience', href: '/#experience' },
-  { label: 'Skills', href: '/#skills' },
+  { label: 'Stack', href: '/#skills' },
   { label: 'Content', href: '/#content' },
   { label: 'Contact', href: '/#contact' },
 ]
@@ -13,44 +13,77 @@ const socials = [
   { label: 'GitHub', href: 'https://github.com/nabeelscode', icon: 'GH' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/nabeelimrann/', icon: 'in' },
   { label: 'Instagram', href: 'https://instagram.com/nabeelscode', icon: '◎' },
-  { label: 'YouTube', href: '#', icon: '▶' },
+  { label: 'YouTube', href: 'https://youtube.com/@nabeelscode', icon: '▶' },
 ]
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 mb-10 sm:mb-12">
+    <footer className="footer-root relative z-10">
+      <style>{`
+        .footer-root {
+          border-top: 1px solid var(--border-2);
+          background: var(--bg-card);
+        }
+        .footer-nav-link {
+          color: var(--ink-5);
+          font-size: 0.875rem;
+          transition: color 0.15s;
+          text-decoration: none;
+        }
+        .footer-nav-link:hover { color: var(--ink); }
+        .footer-social {
+          width: 2.25rem;
+          height: 2.25rem;
+          border-radius: var(--r-sm);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.7rem;
+          font-weight: 700;
+          font-family: var(--font-mono);
+          background: var(--bg-sunken);
+          color: var(--ink-4);
+          transition: all 0.15s;
+          text-decoration: none;
+        }
+        .footer-social:hover {
+          background: var(--ink);
+          color: #fff;
+        }
+      `}</style>
+
+      <div className="container py-12 sm:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 mb-10 sm:mb-12">
+
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-1 mb-4">
-              <span className="font-mono text-lg sm:text-xl font-bold text-[var(--text-primary)]">
-                Nabeel&apos;s
+              <span className="text-lg font-bold" style={{ color: 'var(--ink)' }}>
+                Nabeel
               </span>
-              <span className="font-mono text-lg sm:text-xl font-bold text-[var(--accent-primary)]">
-                Code
+              <span className="text-lg font-light" style={{ color: 'var(--ink-5)' }}>
+                {' '}Imran
               </span>
             </Link>
-            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-              AI Engineering &amp; Intelligent Automation
+            <p className="text-sm leading-relaxed mb-2" style={{ color: 'var(--ink-5)' }}>
+              AI Engineer · Intelligent Automation · GenAI Systems
             </p>
-            <p className="text-sm text-[var(--text-muted)] mt-2 italic">
-              &ldquo;Building systems that run while you sleep.&rdquo;
+            <p className="text-sm" style={{ color: 'var(--ink-6)' }}>
+              &ldquo;Production systems enterprises depend on.&rdquo;
             </p>
           </div>
 
           {/* Quick links */}
           <div>
-            <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-4">
-              Quick Links
+            <p
+              className="text-[11px] font-semibold uppercase tracking-widest mb-4"
+              style={{ color: 'var(--ink-6)', fontFamily: 'var(--font-mono)' }}
+            >
+              Navigation
             </p>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors duration-200"
-                >
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
+              {navLinks.map(link => (
+                <Link key={link.label} href={link.href} className="footer-nav-link">
                   {link.label}
                 </Link>
               ))}
@@ -59,10 +92,13 @@ export function Footer() {
 
           {/* Social */}
           <div>
-            <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-4">
+            <p
+              className="text-[11px] font-semibold uppercase tracking-widest mb-4"
+              style={{ color: 'var(--ink-6)', fontFamily: 'var(--font-mono)' }}
+            >
               Connect
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2.5">
               {socials.map(({ icon, href, label }) => (
                 <a
                   key={label}
@@ -71,21 +107,26 @@ export function Footer() {
                   rel="noopener noreferrer"
                   aria-label={label}
                   title={label}
-                  className="w-10 h-10 rounded-lg border border-[var(--border-subtle)] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--accent-primary)] hover:border-[var(--border-accent)] hover:bg-[var(--accent-subtle)] transition-all duration-200 text-xs font-bold font-mono"
+                  className="footer-social"
                 >
                   {icon}
                 </a>
               ))}
             </div>
+            <p className="mt-5 text-sm" style={{ color: 'var(--ink-5)' }}>
+              i.nabeel7@outlook.com
+            </p>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-[var(--border-subtle)] pt-6 sm:pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4">
-          <p className="text-xs sm:text-sm text-[var(--text-muted)]">
-            © {new Date().getFullYear()} Nabeel Imran · Nabeel&apos;s Code
+        <div
+          className="pt-6 sm:pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
+          style={{ borderTop: '1px solid var(--border-2)' }}
+        >
+          <p className="text-xs sm:text-sm" style={{ color: 'var(--ink-6)' }}>
+            © {new Date().getFullYear()} Nabeel Imran · All rights reserved
           </p>
-          <p className="text-xs sm:text-sm text-[var(--text-muted)]">
+          <p className="text-xs sm:text-sm" style={{ color: 'var(--ink-6)' }}>
             Islamabad, Pakistan · Available for remote work globally
           </p>
         </div>

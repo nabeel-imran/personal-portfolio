@@ -7,7 +7,7 @@ import { BillyChat } from './BillyChat'
 
 const WHATSAPP_NUMBER = '923239960094'
 const WHATSAPP_MESSAGE = encodeURIComponent(
-  "Hi Nabeel — found you via nabeelscode.com. I'd like to discuss a project."
+  "Hi Nabeel — I came across your portfolio and I'd like to discuss a project."
 )
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`
 

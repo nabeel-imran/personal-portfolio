@@ -14,12 +14,10 @@ export function Skills() {
         subtitle="40+ technologies across AI, automation, full-stack, cloud, and enterprise systems."
       />
 
-      {/* Animated logo wall */}
       <motion.div variants={fadeUpVariants} custom={3} className="mb-14 sm:mb-20">
         <StackMarquee />
       </motion.div>
 
-      {/* Categorized icon grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {categories.map((cat, i) => {
           const items = stack.filter((s) => s.category === cat.key)
@@ -28,13 +26,14 @@ export function Skills() {
               key={cat.key}
               variants={fadeUpVariants}
               custom={i + 4}
-              className="glass-card p-5 sm:p-6 group hover:border-[var(--border-accent)] transition-all duration-300"
+              className="card p-5 sm:p-6 group hover:shadow-[var(--shadow-md)] transition-all duration-200"
+              style={{ borderRadius: 'var(--r-lg)' }}
             >
-              <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border-subtle)]">
-                <h3 className="text-sm sm:text-base font-semibold text-[var(--text-primary)]">
+              <div className="flex items-center justify-between mb-4 pb-3" style={{ borderBottom: '1px solid var(--border)' }}>
+                <h3 className="text-sm sm:text-base font-semibold" style={{ color: 'var(--ink)', fontFamily: 'var(--font-heading)' }}>
                   {cat.label}
                 </h3>
-                <span className="text-[10px] font-mono text-[var(--text-muted)] tracking-wider">
+                <span className="text-[10px] font-semibold tabular-nums" style={{ color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>
                   {String(items.length).padStart(2, '0')}
                 </span>
               </div>
@@ -45,13 +44,16 @@ export function Skills() {
                   return (
                     <li
                       key={tool.name}
-                      className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border border-transparent hover:border-[var(--border-subtle)] hover:bg-[var(--bg-tertiary)] transition-all duration-200 cursor-default"
+                      className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg transition-all duration-150 cursor-default"
+                      style={{}}
+                      onMouseEnter={e => { e.currentTarget.style.background = 'var(--bg-alt)' }}
+                      onMouseLeave={e => { e.currentTarget.style.background = '' }}
                     >
                       <Icon
-                        className="w-4 h-4 flex-shrink-0 transition-colors duration-200"
+                        className="w-4 h-4 flex-shrink-0"
                         style={{ color: tool.color }}
                       />
-                      <span className="text-xs text-[var(--text-secondary)] truncate">
+                      <span className="text-xs truncate" style={{ color: 'var(--ink-3)' }}>
                         {tool.name}
                       </span>
                     </li>
@@ -63,11 +65,11 @@ export function Skills() {
         })}
       </div>
 
-      {/* Footer note */}
       <motion.p
         variants={fadeUpVariants}
         custom={categories.length + 4}
-        className="text-center text-sm text-[var(--text-muted)] mt-8 sm:mt-10 max-w-2xl mx-auto"
+        className="text-center text-sm mt-8 sm:mt-10 max-w-2xl mx-auto"
+        style={{ color: 'var(--ink-4)' }}
       >
         Don&apos;t see your stack? Nabeel is a senior engineer who picks up modern tools fast —
         the stack rarely matters as much as how the system is architected.
@@ -76,5 +78,4 @@ export function Skills() {
   )
 }
 
-// Re-export types for any external callers
 export type { StackCategory }

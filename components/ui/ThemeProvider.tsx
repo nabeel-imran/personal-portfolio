@@ -20,7 +20,7 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-const STORAGE_KEY = 'nabeelscode-theme'
+const STORAGE_KEY = 'nabeel-imran-theme'
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   // Default to 'dark' for SSR. The no-flash inline script applies the right
@@ -84,4 +84,4 @@ export function useTheme(): ThemeContextValue {
  * We intentionally don't read prefers-color-scheme here so the brand always
  * loads in the intended dark aesthetic on first visit; users can switch.
  */
-export const themeScript = `(function(){try{var t=localStorage.getItem('${STORAGE_KEY}');if(t!=='light'&&t!=='dark')t='dark';document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`
+export const themeScript = `(function(){document.documentElement.dataset.theme='light';try{localStorage.setItem('${STORAGE_KEY}','light');}catch(e){}})();`

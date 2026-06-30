@@ -1,22 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from 'next/font/google'
+import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/layout/Navigation'
 import { Footer } from '@/components/layout/Footer'
 import { FloatingActions } from '@/components/ui/FloatingActions'
 import { ThemeProvider, themeScript } from '@/components/ui/ThemeProvider'
+import { SmoothScroll } from '@/components/ui/SmoothScroll'
 
-const inter = Inter({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-heading',
   display: 'swap',
-})
-
-const display = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['300', '400', '500', '600', '700'],
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -30,8 +25,8 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || 'https://nabeelscode.com'
   ),
   title: {
-    default: "Nabeel Imran — AI Engineer | Nabeel's Code",
-    template: "%s | Nabeel's Code",
+    default: 'Nabeel Imran — AI Engineer',
+    template: '%s | Nabeel Imran',
   },
   description:
     'AI Engineer specializing in Intelligent Automation, LLM Integration, and Full-Stack AI Products. Building production-grade systems with n8n, Axiom.ai, Make.com, LangChain, and modern LLMs.',
@@ -46,8 +41,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://nabeelscode.com',
-    siteName: "Nabeel's Code",
-    title: "Nabeel Imran — AI Engineer | Nabeel's Code",
+    siteName: 'Nabeel Imran',
+    title: 'Nabeel Imran — AI Engineer',
     description: 'Production-grade AI automation, GenAI systems, and full-stack AI products.',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
@@ -65,9 +60,8 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Nabeel Imran',
-  alternateName: "Nabeel's Code",
+  alternateName: "Nabeel Imran AI Engineer",
   url: 'https://nabeelscode.com',
-  image: 'https://nabeelscode.com/nabeel-imran.jpg',
   sameAs: [
     'https://www.linkedin.com/in/nabeelimrann/',
     'https://instagram.com/nabeelscode',
@@ -75,15 +69,8 @@ const jsonLd = {
   ],
   jobTitle: 'AI Engineer',
   worksFor: { '@type': 'Organization', name: 'Peersol Consulting' },
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Islamabad',
-    addressCountry: 'PK',
-  },
-  knowsAbout: [
-    'AI Automation', 'n8n', 'Make.com', 'LangChain', 'RAG',
-    'LLM Integration', 'Full-Stack Development', 'RPA',
-  ],
+  address: { '@type': 'PostalAddress', addressLocality: 'Islamabad', addressCountry: 'PK' },
+  knowsAbout: ['AI Automation', 'n8n', 'Make.com', 'LangChain', 'RAG', 'LLM Integration', 'Full-Stack Development', 'RPA'],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -91,10 +78,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${display.variable} ${jetbrainsMono.variable}`}
+      className={`${plusJakarta.variable} ${jetbrainsMono.variable}`}
     >
       <head>
-        {/* No-flash theme bootstrap — must run before paint */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
           type="application/ld+json"
@@ -103,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider>
+          <SmoothScroll />
           <Navigation />
           <main>{children}</main>
           <Footer />

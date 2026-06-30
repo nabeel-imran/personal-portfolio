@@ -59,6 +59,50 @@ export const projects: Project[] = [
     image: '/projects/rankguide.png',
   },
   {
+    slug: 'dawn-fulfillment-automation',
+    title: 'Dawn Fulfillment — Order Operations Automation',
+    category: 'AI Automation',
+    status: 'live',
+    featured: true,
+    description:
+      'End-to-end n8n order fulfillment engine: order intake → validation → inventory sync → carrier dispatch → customer notifications, with zero manual touchpoints.',
+    longDescription:
+      'A production n8n automation system for Dawn Fulfillment that replaces the entire manual order-operations chain. Orders flow from intake through validation, inventory sync, carrier dispatch, and customer notifications without a human touching them. Built with idempotent retry logic, structured error queues, and full audit logging — the difference between a demo workflow and an operations system a business depends on every day.',
+    tech: ['n8n', 'Webhooks', 'REST APIs', 'PostgreSQL', 'Slack', 'JavaScript'],
+    achievements: [
+      'Fully automated order lifecycle — intake to delivery notification',
+      'Idempotent retry logic with structured error queues',
+      'Real-time inventory and carrier status sync',
+      'Slack escalation for human-in-the-loop edge cases',
+      'Full audit trail for every order event',
+    ],
+    url: null,
+    github: null,
+    image: '/projects/dawn-fulfillment.png',
+  },
+  {
+    slug: 'cv-screening-automation',
+    title: 'AI CV Screening Pipeline',
+    category: 'AI Automation',
+    status: 'live',
+    featured: true,
+    description:
+      'n8n + LLM recruitment pipeline: parses incoming CVs, scores candidates against role criteria, and delivers ranked shortlists with reasoning — hours of screening down to minutes.',
+    longDescription:
+      'An AI-powered recruitment screening system built on n8n. Incoming CVs are parsed, structured, and scored by an LLM against role-specific criteria — skills match, experience depth, and red flags — then delivered as a ranked shortlist with per-candidate reasoning the hiring team can audit. What used to take a recruiter hours per role now happens in minutes, with consistent criteria applied to every candidate.',
+    tech: ['n8n', 'LLM Integration', 'Document Parsing', 'Google Sheets', 'Email Automation'],
+    achievements: [
+      'Automated CV parsing and structured candidate extraction',
+      'LLM scoring against role-specific criteria with reasoning',
+      'Ranked shortlists delivered automatically to hiring teams',
+      'Hours of manual screening reduced to minutes per role',
+      'Consistent, auditable evaluation across every candidate',
+    ],
+    url: null,
+    github: null,
+    image: '/projects/cv-screening.png',
+  },
+  {
     slug: 'social-media-saas',
     title: 'Social Media Content Generation SaaS',
     category: 'Full-Stack',

@@ -7,65 +7,49 @@ interface SectionWrapperProps {
   id?: string
   className?: string
   children: React.ReactNode
-  fullWidth?: boolean
+  alt?: boolean
 }
 
+// Signature easing — fast start, soft landing (used across the whole site)
+export const EASE = [0.22, 1, 0.36, 1] as const
+
 export const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 32, filter: 'blur(6px)' },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.08, ease: 'easeOut' as const },
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, delay: i * 0.08, ease: EASE },
   }),
 }
 
 export const staggerContainer = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
 }
 
 export const fadeInScale = {
-  hidden: { opacity: 0, scale: 0.95 },
+  hidden: { opacity: 0, scale: 0.94, filter: 'blur(8px)' },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.5, ease: 'easeOut' as const },
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, ease: EASE },
   },
 }
 
-export const slideInLeft = {
-  hidden: { opacity: 0, x: -40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, ease: 'easeOut' as const },
-  },
-}
-
-export const slideInRight = {
-  hidden: { opacity: 0, x: 40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, ease: 'easeOut' as const },
-  },
-}
-
-export function SectionWrapper({
-  id,
-  className,
-  children,
-  fullWidth = false,
-}: SectionWrapperProps) {
+export function SectionWrapper({ id, className, children, alt }: SectionWrapperProps) {
   return (
-    <section id={id} className={cn('section-padding relative z-10', className)}>
+    <section
+      id={id}
+      className={cn('section', className)}
+      style={{ background: alt ? 'var(--bg-alt)' : 'var(--bg)' }}
+    >
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-80px' }}
-        className={cn(!fullWidth && 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8')}
+        className="container"
       >
         {children}
       </motion.div>
@@ -85,12 +69,12 @@ export function SectionHeader({
   center?: boolean
 }) {
   return (
-    <div className={cn('mb-10 sm:mb-12 lg:mb-16', center && 'text-center')}>
+    <div className={cn('mb-10 sm:mb-14', center && 'text-center')}>
       {eyebrow && (
         <motion.p
           variants={fadeUpVariants}
           custom={0}
-          className="font-mono text-xs sm:text-sm text-[var(--accent-primary)] mb-3 tracking-wider uppercase"
+          className={cn('eyebrow', center && 'justify-center')}
         >
           {eyebrow}
         </motion.p>
@@ -102,10 +86,8 @@ export function SectionHeader({
         <motion.p
           variants={fadeUpVariants}
           custom={2}
-          className={cn(
-            'mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-[var(--text-secondary)] max-w-2xl',
-            center && 'mx-auto'
-          )}
+          className={cn('mt-3 text-base sm:text-lg max-w-2xl', center && 'mx-auto')}
+          style={{ color: 'var(--ink-3)' }}
         >
           {subtitle}
         </motion.p>

@@ -88,7 +88,7 @@ export default function BlogPage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-medium text-[var(--accent-primary)] hover:text-[var(--accent-bright)] transition-colors"
           >
-            Nabeel&apos;s Code on YouTube <ArrowRight className="w-4 h-4" />
+            Watch on YouTube <ArrowRight className="w-4 h-4" />
           </a>
         </div>
       </div>
